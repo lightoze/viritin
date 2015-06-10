@@ -422,7 +422,9 @@ public class MBeanFieldGroup<T> extends BeanFieldGroup<T> implements
 
     @Override
     public void textChange(FieldEvents.TextChangeEvent event) {
-        valueChange(null);
+        if (event.getSource() instanceof Field) {
+            ((Field) event.getSource()).setValue(event.getText());
+        }
     }
 
     private boolean beanModified = false;
